@@ -1,0 +1,12 @@
+<head>
+  <title>calendar</title>
+</head>
+
+<body>
+  {{#with currentUser}}
+      <h1>Hello, {{this.services.lea.email}}</h1>
+      <button class="logout-button">logout</button>
+  {{else}}
+      <button class="login-button">login now</button>
+  {{/with}}
+</body>
