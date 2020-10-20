@@ -1,0 +1,11 @@
+<head>
+  <title>authserver</title>
+</head>
+
+<body>
+    {{#with currentUser}}
+        {{> authorize }}
+    {{else}}
+        {{> login}}
+    {{/with}}
+</body>

@@ -1,0 +1,31 @@
+<template name="authorize">
+    <form id="authForm"
+          method="post"
+          role="form"
+          class="{{#unless loadComplete}}hidden{{/unless}}">
+
+        <label>Allow</label>
+        <input type="text" name="allow" value="yes">
+
+        <label>Token</label>
+        <input type="text" name="token" value="{{getToken}}">
+
+        <label>Response Type</label>
+        <input type="text" name="response_type" value="code">
+
+        {{#with queryParams}}
+            <label>Client Id</label>
+            <input type="text" name="client_id" value="{{this.client_id}}">
+
+            <label>Redirect URI</label>
+            <input type="text" name="redirect_uri" value="{{this.redirect_uri}}">
+
+            <label>State</label>
+            <input type="text" name="state" value="{{this.state}}">
+        {{/with}}
+
+        {{!-- auto sign in is set when we switch to another user and login form this templtate --}}
+
+        <button id="authorize-button" type="submit">authorize</button>
+    </form>
+</template>
