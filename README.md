@@ -46,27 +46,62 @@ $ meteor npm install
 $ meteor npm run authserver
 ```
 
-### Step 3. Install and start the `calender` client
+This will start the auth server and register our client app (the credentials
+can be found in [settings.json](./authserver/settings.json)).
+
+If you start for the first time it will also creare a default user for you
+to play around with.
+
+The console output should then look like the following:
 
 ```bash
-$ cd calender
+> authserver@ authserver /path/to/meteor-auth-server-example/authserver
+> meteor --settings=settings.json --port=9090
+
+[[[[[ ~/path/to/meteor-auth-server-example/authserver ]]]]]
+
+=> Started proxy.                             
+=> Started MongoDB.                           
+I20201021-10:58:18.471(2)? [OAuth2Server]: register client <Calendar>
+I20201021-10:58:18.497(2)? [Accounts]: create user johndoe@example.com
+=> Started your app.
+
+=> App running at: http://localhost:9090/
+```
+
+### Step 3. Install and start the `calender` client
+
+Now open a new terminal tab or window and go to the `calendar` app folder and
+repeat the installation for this app, too.
+
+```bash
+$ cd calendar
 $ meteor npm install
 $ meteor npm run calendar
 ```
 
 ### Step 4. Login and authorize
 
+The following steps take place in the browser.
+
 **4.1 Open the `calendar` app**
 
-The final step is to open the `calendar` client at `localhost:5050` and click on
-the login button.
+The final step is to open the `calendar` client at **`localhost:5050`** and 
+click on the "login now" button.
 
-A popup opens. Enable popups for localhost, in case it won't. 
+A popup opens; please enable popups for localhost, in case it won't. 
 The OAuth2 workflow can also be configured to not use popups (but a redirect)
 but this is out of scope for now.
 
 **4.2 Enter login credentials**
 
+Check the address bar of the popup, you should see something like this
+
+``` 
+localhost:9090/oauth/authorize?response_type=code&client_id=porhLyvwTdhJgdda8&scope=email&display=popup&redirect_uri=http%3A%2F%2Flocalhost%3A5050%2F_oauth%2Flea&state=eyJsb2dpblN0eWxlIjoicG9wdXAiLCJjcmVkZW50aWFsVG9rZW4iOiJoSTFza3ZKRFU1TTg2d2pVYk1xZDdkdm1OalAtem9QNkkyc3dSUnBDVDltIiwiaXNDb3Jkb3ZhIjpmYWxzZX0%3D
+```
+
+This is a typical OAuth2 get request to obtain the authorization code.
 Enter the following login credentials:
 
 - username: `johndoe@example.com`
